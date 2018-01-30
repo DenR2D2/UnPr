@@ -7,9 +7,10 @@ public class Move : MonoBehaviour
 
 	public float speed = 10f;
 	//public float jumpRate = 2f;
-    public float jump = 250f;
+    public float jump = 350f;
     public Transform groundCheck;
     public LayerMask whatIsGround;
+    public float run=20;
 
 
 	Vector3 movement;
@@ -28,9 +29,10 @@ public class Move : MonoBehaviour
 
 	void Update()
 	{
-        if (isGrounded && Input.GetButton("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(new Vector3(0f,jump,0f));
+            
         }
         
     }
@@ -48,7 +50,15 @@ public class Move : MonoBehaviour
 	void Moving (float h)
 	{
 		movement.Set (h, 0f, 0f);
-		movement = movement.normalized * speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movement = movement.normalized * (speed+run)* Time.deltaTime;
+        }
+        else
+        {
+            movement = movement.normalized * speed * Time.deltaTime;
+        }
+		
 		rb.MovePosition (transform.position + movement);
 	}
 }

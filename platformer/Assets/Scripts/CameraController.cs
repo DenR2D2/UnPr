@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
 
     public GameObject player;
     public float maxDifference;
-    public float speed = 10f;
+    public float speed = 40f;
 
     Rigidbody rb;
     float difference;
